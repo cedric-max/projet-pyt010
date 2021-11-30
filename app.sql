@@ -17,3 +17,7 @@ CREATE TABLE IF NOT EXISTS users
         CHECK (UserPassword <> '')
 );
 CREATE INDEX [IDX_UserName] ON users([UserName]);
+
+INSERT INTO users VALUES ('Tibow', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
+('Cédric', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
+('Thibaut', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f');
