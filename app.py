@@ -1,27 +1,78 @@
-from flask import Flask
+from flask import Flask, request, g, session, redirect, url_for, flash, render_template
+from werkzeug.security import check_password_hash, generate_password_hash
 import sqlite3
 
 ### CONSTANTS ###
 app = Flask(__name__)
-DATABASE = "./app.db"
 SQL_SCRIPT = "./app.sql"
+app.config['DATABASE'] = "./app.db"
+app.config['SECRET_KEY'] = '57d907f1370fb2b6e5ca21ef55e584ef8240dcdecbfcc35e8389cdd2751e52bb'
 
 ### DATABASE OPERATIONS ###
 
 # Initialize database
 with open(SQL_SCRIPT) as fd:
     print("Database connection...")
-    connection = sqlite3.connect(DATABASE)
+    connection = sqlite3.connect(app.config['DATABASE'])
     cursor = connection.cursor()
     cursor.executescript(fd.read())
     print("Database initialized with success!")
     connection.close()
 
+# Connect and get database
+def get_db():
+    if 'db' not in g:
+        g.db = sqlite3.connect(
+            app.config['DATABASE'],
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+        g.db.row_factory = sqlite3.Row
+
+    return g.db
+
 ### ROUTES ###
 @app.route("/")
 def index():
-    return "HELLO WORLD"
+    user_id = session.get('user_id')
 
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM users WHERE rowid = ?', (user_id,)
+        ).fetchone()
+    
+    return f"<h1>HELLO {g.user['UserName']}</h1><a href='/logout'>LOGOUT</a>"
+
+@app.route("/register", methods=('GET', 'POST'))
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT oid, UserName, UserPassword FROM users WHERE UserName = ?;', (username,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['UserPassword'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['rowid']
+            return redirect(url_for('index'))
+
+        flash(error)
+
+    return render_template('register.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('register'))
 
 if __name__ == "__main__":
     app.run(debug=True)
