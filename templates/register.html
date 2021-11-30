@@ -6,7 +6,7 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Login</h5>
-          <form action="/login" method="POST">
+          <form action="/register" method="POST">
             <div class="mb-3">
               <label for="username" class="form-label">Username:</label>
               <input
@@ -27,21 +27,24 @@
                 placeholder="Enter your password..."
               />
             </div>
-            {% if error_message %}
-              <div class="alert alert-danger">
-                {{ error_message }}
-              </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                  {{ messages[0] }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             {% endif %}
+            {% endwith %}
             <button
               class="btn btn-lg btn-dark btn-block text-uppercase"
               type="submit"
             >
               Login
             </button>
-            <p>{{toto}}</p>
           </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
