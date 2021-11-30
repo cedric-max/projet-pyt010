@@ -18,6 +18,7 @@ with open(SQL_SCRIPT) as fd:
     cursor.executescript(fd.read())
     print("Database initialized with success!")
     connection.close()
+    # print(generate_password_hash('riri'));
 
 # Connect and get database
 def get_db():
@@ -36,13 +37,17 @@ def index():
     user_id = session.get('user_id')
 
     if user_id is None:
-        g.user = None
+        return redirect(url_for('register'))
     else:
-        g.user = get_db().execute(
-            'SELECT * FROM users WHERE rowid = ?', (user_id,)
-        ).fetchone()
-    
-    return f"<h1>HELLO {g.user['UserName']}</h1><a href='/logout'>LOGOUT</a>"
+        todos = get_db().execute(
+            "SELECT oid, ToDo FROM todos WHERE UserId = ?", (user_id,)
+        ).fetchall()
+        listToDo = []
+        for todo in todos :
+            row = {"id" : todo['rowid'], "todo" : todo['ToDo']}
+            listToDo.append(row)
+    # return listToDo;
+    return render_template('index.html', todoTab=listToDo);
 
 @app.route("/register", methods=('GET', 'POST'))
 def register():
