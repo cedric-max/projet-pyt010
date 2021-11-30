@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+{% if todo_list %}
+<p>number of things to do : <span class="fw-bold">({{ todo_list|count }})</span> </p>
+<ul>
+    {% for todo in todo_list %}
+    <li>{{ todo.name }}</li>
+    <div class="container">
+        <div  class="row align-items-start">
+            <div class="col">
+                <button type="button" class="btn btn-warning">Edit</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
