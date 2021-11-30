@@ -18,7 +18,6 @@ with open(SQL_SCRIPT) as fd:
     cursor.executescript(fd.read())
     print("Database initialized with success!")
     connection.close()
-    # print(generate_password_hash('riri'));
 
 # Connect and get database
 def get_db():
