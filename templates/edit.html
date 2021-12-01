@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+{% if todo %}
+<span class="fw-bold">({{ todo.id }})</span>
+{% else %}
+<span class="fw-bold">Aucun ID</span>
+{% endif %}
+{% endblock %}

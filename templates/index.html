@@ -8,10 +8,12 @@
     <div class="container">
         <div  class="row align-items-start">
             <div class="col">
-                <button type="button" class="btn btn-warning">Edit</button>
+                <button type="button" class="btn btn-warning"><a href="{{ url_for('edit', id=todo.id) }}">Edit</a></button>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-danger">Delete</button>
+                <form action="" method="post">
+                <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
             </div>
         </div>
     </div>

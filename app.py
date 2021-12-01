@@ -74,5 +74,28 @@ def logout():
     session.clear()
     return redirect(url_for('register'))
 
+#Method
+
+#Implementation Add todos
+@app.route("/edit/<id>", methods=('GET','POST'))
+def edit(id=None):
+    todo = {"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1}
+    return render_template('edit.html', todo=todo)
+
+
+#Implementation Delete todos
+@app.route("/delete/<id>", methods=['POST'])
+def delete(id=None):
+    todo = {"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1}
+    return redirect(url_for('test'))
+
+
+@app.route("/test")
+def test():
+    todo_list = [{"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1},
+    {"name" : "Sed malesuada ipsum diam, sed elementum tellus porttitor ut. Aenean ornare turpis eget ligula iaculis, in ullamcorper dolor ultrices","id" : 2},
+    {"name" : "Morbi convallis non mauris ut auctor. Integer ac laoreet purus, sit amet lacinia urna. Curabitur nec bibendum libero.","id" : 3}]
+    return render_template('index.html', todo_list=todo_list)
+
 if __name__ == "__main__":
     app.run(debug=True)
