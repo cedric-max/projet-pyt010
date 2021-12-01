@@ -1,4 +1,13 @@
+# Python
+
 venv/
 **/*.pyc
+
+# Database
 **/*.db
+Script.sql
+**/*.exe
+
+# IDE
 .idea
+.vscode
