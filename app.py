@@ -46,7 +46,7 @@ def index():
             row = {"id" : todo['rowid'], "todo" : todo['ToDo']}
             listToDo.append(row)
     # return listToDo;
-    return render_template('index.html', todoTab=listToDo);
+    return render_template('index.html', todoTab=listToDo)
 
 @app.route("/register", methods=('GET', 'POST'))
 def register():
@@ -94,12 +94,12 @@ def delete(id=None):
     return redirect(url_for('test'))
 
 
-@app.route("/test")
-def test():
-    todo_list = [{"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1},
-    {"name" : "Sed malesuada ipsum diam, sed elementum tellus porttitor ut. Aenean ornare turpis eget ligula iaculis, in ullamcorper dolor ultrices","id" : 2},
-    {"name" : "Morbi convallis non mauris ut auctor. Integer ac laoreet purus, sit amet lacinia urna. Curabitur nec bibendum libero.","id" : 3}]
-    return render_template('index.html', todo_list=todo_list)
+# @app.route("/test")
+# def test():
+#     todo_list = [{"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1},
+#     {"name" : "Sed malesuada ipsum diam, sed elementum tellus porttitor ut. Aenean ornare turpis eget ligula iaculis, in ullamcorper dolor ultrices","id" : 2},
+#     {"name" : "Morbi convallis non mauris ut auctor. Integer ac laoreet purus, sit amet lacinia urna. Curabitur nec bibendum libero.","id" : 3}]
+#     return render_template('index.html', todo_list=todo_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
