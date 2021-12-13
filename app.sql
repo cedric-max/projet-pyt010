@@ -21,3 +21,19 @@ CREATE INDEX [IDX_UserName] ON users([UserName]);
 INSERT INTO users VALUES ('Tibow', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
 ('Cédric', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
 ('Thibaut', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f');
+
+--Jeu de données
+INSERT INTO users(UserName, UserPassword) VALUES('Riri', 'pbkdf2:sha256:260000$vDjptUV5HLrL5XuS$bcf9d4fe32ce099d5fb7e449e95a2b8dacde2f539d9d9d7c3a5db8467360d210');
+INSERT INTO users(UserName, UserPassword) VALUES('Roro', 'roro');
+INSERT INTO users(UserName, UserPassword) VALUES('Titi', 'titi');
+INSERT INTO users(UserName, UserPassword) VALUES('Toto', 'toto');
+INSERT INTO users(UserName, UserPassword) VALUES('Arthur', 'arthur');
+
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire la vaisselle",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Appeler maman",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Libérer le Kraken",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire la vaisselle",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Fendre du bois",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Prendre Fany",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire le ménage",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Retrouver Dédé au PMU",2);

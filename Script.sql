@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS todos;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS todos (
-    ToDo NVARCHAR(50) NOT NULL 
+    ToDoName NVARCHAR(50) NOT NULL
         CHECK (ToDoName <> ''),
     UserId INTEGER NOT NULL,
     FOREIGN KEY (UserId) REFERENCES users(oid)

@@ -39,14 +39,13 @@ def index():
         return redirect(url_for('register'))
     else:
         todos = get_db().execute(
-            "SELECT oid, ToDo FROM todos WHERE UserId = ?", (user_id,)
+            "SELECT oid, ToDoName FROM todos WHERE UserId = ?", (user_id,)
         ).fetchall()
-        listToDo = []
+        list_to_do = []
         for todo in todos :
-            row = {"id" : todo['rowid'], "todo" : todo['ToDo']}
-            listToDo.append(row)
-    # return listToDo;
-    return render_template('index.html', todoTab=listToDo)
+            row = {"id" : todo['rowid'], "todo" : todo['ToDoName']}
+            list_to_do.append(row)
+    return render_template('index.html', todo_list=list_to_do)
 
 @app.route("/register", methods=('GET', 'POST'))
 def register():
