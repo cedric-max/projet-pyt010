@@ -34,18 +34,17 @@ def get_db():
 @app.route("/")
 def index():
     user_id = session.get('user_id')
-
     if user_id is None:
         return redirect(url_for('register'))
     else:
         todos = get_db().execute(
             "SELECT oid, ToDoName FROM todos WHERE UserId = ?", (user_id,)
         ).fetchall()
-        list_to_do = []
+        todo_list = []
         for todo in todos :
-            row = {"id" : todo['rowid'], "todo" : todo['ToDoName']}
-            list_to_do.append(row)
-    return render_template('index.html', todo_list=list_to_do)
+            row = {"id": todo['rowid'], "name": todo['ToDoName']}
+            todo_list.append(row)
+    return render_template('index.html', todo_list=todo_list)
 
 @app.route("/register", methods=('GET', 'POST'))
 def register():
