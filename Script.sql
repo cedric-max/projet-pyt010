@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS todos;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS todos (
-    ToDo NVARCHAR(50) NOT NULL 
-        CHECK (ToDo <> ''),
+    ToDoName NVARCHAR(50) NOT NULL
+        CHECK (ToDoName <> ''),
     UserId INTEGER NOT NULL,
     FOREIGN KEY (UserId) REFERENCES users(oid)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -24,11 +24,11 @@ INSERT INTO users(UserName, UserPassword) VALUES('Titi', 'titi');
 INSERT INTO users(UserName, UserPassword) VALUES('Toto', 'toto');
 INSERT INTO users(UserName, UserPassword) VALUES('Arthur', 'arthur');
 
-INSERT INTO todos(ToDo, UserId) VALUES("Faire la vaisselle",4);
-INSERT INTO todos(ToDo, UserId) VALUES("Appeler maman",4);
-INSERT INTO todos(ToDo, UserId) VALUES("Libérer le Kraken",4);
-INSERT INTO todos(ToDo, UserId) VALUES("Faire la vaisselle",4);
-INSERT INTO todos(ToDo, UserId) VALUES("Fendre du bois",2);
-INSERT INTO todos(ToDo, UserId) VALUES("Prendre Fany",2);
-INSERT INTO todos(ToDo, UserId) VALUES("Faire le ménage",2);
-INSERT INTO todos(ToDo, UserId) VALUES("Retrouver Dédé au PMU",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire la vaisselle",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Appeler maman",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Libérer le Kraken",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire la vaisselle",4);
+INSERT INTO todos(ToDoName, UserId) VALUES("Fendre du bois",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Prendre Fany",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Faire le ménage",2);
+INSERT INTO todos(ToDoName, UserId) VALUES("Retrouver Dédé au PMU",2);
