@@ -81,23 +81,32 @@ def logout():
 #Implementation Add todos
 @app.route("/edit/<id>", methods=('GET','POST'))
 def edit(id):
+    if request.method == 'POST':
+        name = request.form["name"]
+        db = get_db()
+        db.execute(
+            'UPDATE todos SET ToDoName = ? WHERE oid = ?;', (name, id)
+        )
+        db.commit()
 
-
+        return redirect(url_for('index'))
 
     db = get_db()
-    error = None
-    todo = db.execute(
-        'SELECT ToDoName FROM todos WHERE oid = ?;', (id,)
+    row = db.execute(
+        'SELECT rowid, ToDoName FROM todos WHERE oid = ?;', (id,)
     ).fetchone()
 
-    flash (error)
+    
+    print(row['rowid'])
+    todo = {"id": row['rowid'], "name": row['ToDoName']}
     
     return render_template('edit.html', todo=todo)
 
 
 #Implementation Delete todos
-#@app.route("/delete/<id>", methods=['POST'])
-# def delete(id):
+@app.route("/delete/<id>", methods=['POST'])
+def delete(id):
+    pass
 #     if request.method == 'POST':
 #         db = get_db()
 #         error = None
