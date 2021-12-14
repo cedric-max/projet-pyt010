@@ -88,18 +88,13 @@ def edit(id):
             'UPDATE todos SET ToDoName = ? WHERE oid = ?;', (name, id)
         )
         db.commit()
-
         return redirect(url_for('index'))
 
     db = get_db()
     row = db.execute(
         'SELECT rowid, ToDoName FROM todos WHERE oid = ?;', (id,)
     ).fetchone()
-
-    
-    print(row['rowid'])
     todo = {"id": row['rowid'], "name": row['ToDoName']}
-    
     return render_template('edit.html', todo=todo)
 
 
