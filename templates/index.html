@@ -1,23 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
-{% if todo_list %}
-<p>number of things to do : <span class="fw-bold">({{ todo_list|count }})</span> </p>
-<ul>
+{% extends "base.html" %} {% block content %} {% if todo_list %}
+<div class="w-75 m-auto">
+  <p>
+    Number of Todos
+    <span class="fw-bold">({{ todo_list|count }})</span>
+  </p>
+  <ul class="list-group">
     {% for todo in todo_list %}
-    <li>{{ todo.name }}</li>
-    <div class="container">
-        <div  class="row align-items-start">
-            <div class="col">
-                <button type="button" class="btn btn-warning"><a href="{{ url_for('edit', id=todo.id) }}">Edit</a></button>
-            </div>
-            <div class="col">
-                <form action="" method="post">
-                <input type="submit" value="Delete" class="btn btn-danger">
-                </form>
-            </div>
+    <li class="list-group-item">
+      <div class="d-flex flex-row justify-content-between align-items-center">
+        <p class="m-1">{{ todo.name | upper }}</p>
+        <div class="d-flex flex-row">
+          <button type="button" class="btn btn-warning m-1">
+            <a href="{{ url_for('edit', id=todo.id) }}" class="text-light" style="text-decoration:none">Edit</a>
+          </button>
+          <form action="{{ url_for('delete', id=todo.id) }}" method="post" class="m-1">
+            <button type="submit" value="Delete" class="btn btn-danger" >Delete</button>
+          </form>
         </div>
-    </div>
+      </div>
+    </li>
     {% endfor %}
-</ul>
-{% endif %}
-{% endblock %}
+  </ul>
+</div>
+{% endif %} {% endblock %}
