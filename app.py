@@ -81,12 +81,22 @@ def logout():
 #Implementation Add todos
 @app.route("/edit/<id>", methods=('GET','POST'))
 def edit(id):
-    todo = {"name" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id rutrum turpis.","id" : 1}
+
+
+
+    db = get_db()
+    error = None
+    todo = db.execute(
+        'SELECT ToDoName FROM todos WHERE oid = ?;', (id,)
+    ).fetchone()
+
+    flash (error)
+    
     return render_template('edit.html', todo=todo)
 
 
 #Implementation Delete todos
-@app.route("/delete/<id>", methods=['POST'])
+#@app.route("/delete/<id>", methods=['POST'])
 # def delete(id):
 #     if request.method == 'POST':
 #         db = get_db()
