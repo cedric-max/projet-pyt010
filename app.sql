@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS users
 );
 CREATE INDEX [IDX_UserName] ON users([UserName]);
 
+-- Mot de passe pour tous les users : azerty
 INSERT INTO users VALUES 
     ('Joe', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
     ('William', 'pbkdf2:sha256:260000$RKKOdIKFmtoRa4Xt$2dfcdb963ce6b6ab1db2fe80c1765f87e9172f686efff2ac373c7785e013346f'),
